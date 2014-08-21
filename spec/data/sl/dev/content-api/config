@@ -1,0 +1,3 @@
+environment=dev
+marklogic.base.url=http://ml.dev.springer-sbm.com:8403
+static.content.base.url=http://static-content.dev.springer-sbm.com:9003
