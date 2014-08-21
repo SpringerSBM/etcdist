@@ -11,7 +11,10 @@ module Etcd
   end
 end
 
-RSpec.configure do |rspec|
-  rspec.include Etcd::SpecHelper
-  rspec.color = true
+RSpec.configure do |config|
+  config.include Etcd::SpecHelper
+  config.color = true
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
+  end
 end
