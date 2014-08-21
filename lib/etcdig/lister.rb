@@ -1,5 +1,3 @@
-# Encoding: utf-8
-
 module Etcdig
   class Lister
 

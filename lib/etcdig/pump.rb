@@ -1,5 +1,3 @@
-# Encoding: utf-8
-
 require 'etcd'
 
 module Etcdig
