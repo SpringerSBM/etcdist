@@ -1,9 +1,12 @@
 module Etcdig
-  class Lister
+
+  ##
+  # Reads config from file system into directories, keys and values.
+  class Reader
 
     ##
     # Returns a hash of type { directory => { key => val } }
-    def list(config_dir)
+    def read(config_dir)
       config_dir = File.expand_path(config_dir)
       puts "looking for properties files in: #{config_dir}"
 
