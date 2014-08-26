@@ -1,3 +1,3 @@
-module Etcdig
+module Etcdist
   VERSION = "0.0.1"
 end

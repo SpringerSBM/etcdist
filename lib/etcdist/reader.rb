@@ -1,4 +1,4 @@
-module Etcdig
+module Etcdist
 
   ##
   # Reads config from file system into directories, keys and values.

@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe Etcdig::Writer do
+describe Etcdist::Writer do
 
   let(:etcd) do
     double('etcd')
   end
 
   let(:writer) do
-    Etcdig::Writer.new(etcd)
+    Etcdist::Writer.new(etcd)
   end
 
   it 'should store entries in etcd' do

@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'etcdig/version'
+require 'etcdist/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "etcdig"
-  spec.version       = Etcdig::VERSION
+  spec.name          = "etcdist"
+  spec.version       = Etcdist::VERSION
   spec.authors       = ["Patric Fornasier"]
   spec.email         = ["patric.fornasier@gmail.com"]
   spec.summary       = %q{Populate etcd in a reproducable way.}

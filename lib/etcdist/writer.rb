@@ -1,6 +1,6 @@
 require 'etcd'
 
-module Etcdig
+module Etcdist
 
   ##
   # Writes config into etcd.

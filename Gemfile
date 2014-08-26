@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in etcdig.gemspec
+# Specify your gem's dependencies in etcdist.gemspec
 gemspec
