@@ -27,15 +27,15 @@ Create your desired directory structure. This will be replicated in etcd. For ex
 ```bash
 mkdir -p config/foo/bar
 ```
-    
-Then create a file in the leaf directory containing the keys and values that you want to go into etcd. For example:    
 
-```bash    
+Then create a file in the leaf directory containing the keys and values that you want to go into etcd. For example:
+
+```bash
 cat <<EOT > config/foo/bar/food.config
 fish=plankton
 cows=grass
 EOT
-```    
+```
 
 The name of the file containing the keys and values doesn't matter. In fact, you can split the configuration into multiple files, if you want. An example would look like:
 
@@ -46,7 +46,7 @@ The name of the file containing the keys and values doesn't matter. In fact, you
         ├── food.config    # contains fish=plankton and cows=grass
         └── more.config    # could contain more keys and values
 ```
-            
+          
 ### Populate etcd
 
 Then pass the path to your config data directory to Etcdist. For example:
@@ -80,7 +80,11 @@ Etcdist::Log.level = :info
 Clone the source code. To see what's possible, run:
 
     $ rake -T
-    
+
+To get the acceptance test to pass, make sure you've got etcd running locally:
+
+    $ docker run -d -p 4001:4001 coreos/etcd
+
 To continuously run tests, run:
 
     $ guard
