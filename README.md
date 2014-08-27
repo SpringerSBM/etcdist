@@ -46,7 +46,7 @@ The name of the file containing the keys and values doesn't matter. In fact, you
         ├── food.config    # contains fish=plankton and cows=grass
         └── more.config    # could contain more keys and values
 ```
-          
+
 ### Populate etcd
 
 Then pass the path to your config data directory to Etcdist. For example:
