@@ -17,7 +17,7 @@ module Etcdist
       files.inject(Hash.new { |h, k| h[k] = {} }) do |h, f|
         directory = File.dirname(f).gsub(config_dir, '')
         entries = Hash[ IO.readlines(f).map { |e| e.chomp.split('=') } ]
-        Log.info("found #{entries.length} entries for #{directory} in #{File.basename(f)}")
+        Log.info("found #{entries.length} entries #{f.gsub(config_dir, '')}")
         Log.debug("entries: #{entries}")
         h[directory].merge!(entries)
         h
