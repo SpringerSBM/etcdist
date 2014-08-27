@@ -58,16 +58,16 @@ config_dir = '.../config'
 Etcdist.execute(config_dir)
 ```
 
-### Configuration
+## Configuration
 
-#### Etcd host
+### Etcd host
 
 ```ruby
 Etcdist.execute(config_dir) # defaults to localhost:4001
 Etcdist.execute(config_dir, host: '127.0.0.1', port: 4003)
 ```
 
-#### Log level
+### Log level
 
 You can control the log level, as follows:
 
