@@ -1,4 +1,4 @@
-require 'etcd'
+require 'etcdist/log'
 
 module Etcdist
 
@@ -11,11 +11,14 @@ module Etcdist
     end
 
     def write(config)
+      written = 0
       config.each do |directory, entries|
         entries.each do |k, v|
           @etcd.set([directory, '/', k].join, value: v)
+          written += 1
         end
       end
+      Log.info("wrote #{written} entries to etcd.")
     end
   end
 end
