@@ -6,10 +6,10 @@ describe Etcdist::Reader do
     Etcdist::Reader.new
   end
 
-  it 'should list keyspaces pointing to key/values' do
+  it 'should return directories pointing to key/values' do
     config_dir = File.join(File.dirname(__FILE__), '../data')
     config = reader.read(config_dir)
-    expect(config).to match( { '/etcdist/foo' => { 'fish' => 'plankton', 'cows' => 'grass' } } )
+    expect(config).to match( { '/etcdist/foo' => { 'fish' => 'plankton', 'cows' => 'grass', 'dogs' => 'bones'} } )
   end
 
 end

@@ -7,21 +7,21 @@ module Etcdist
   class Reader
 
     ##
+    # @param [String] config_dir The path of the config data root directory
     # Returns a hash of type { directory => { key => val } }
     def read(config_dir)
       config_dir = File.expand_path(config_dir)
-      Log.info("looking for config files in: #{config_dir}")
+      files = Dir[ File.join(config_dir, '**', '*') ].reject { |p| File.directory? p }
+      Log.info("found #{files.length} config files in #{config_dir}")
 
-      files = Dir["#{config_dir}/**/app.properties"]
-      Log.info("found #{files.length} config files")
-
-      Hash[files.map do |f|
+      files.inject(Hash.new { |h, k| h[k] = {} }) do |h, f|
         directory = File.dirname(f).gsub(config_dir, '')
-        entries = IO.readlines(f).map { |e| e.chomp.split('=') }
-        Log.info("found #{entries.length} entries for #{directory}")
-        [directory, Hash[entries]]
-      end]
+        entries = Hash[ IO.readlines(f).map { |e| e.chomp.split('=') } ]
+        Log.info("found #{entries.length} entries for #{directory} in #{File.basename(f)}")
+        Log.debug("entries: #{entries}")
+        h[directory].merge!(entries)
+        h
+      end
     end
-
   end
 end
