@@ -1,10 +1,13 @@
 require 'etcd'
+require 'etcdist/log'
 require 'etcdist/reader'
 require 'etcdist/writer'
 
 ##
 # This module provides the Etcdist name space
 module Etcdist
+
+  Log.level = :info
 
   ##
   # This is the place to kick things off, i.e. read config data from F/S and
