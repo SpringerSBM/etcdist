@@ -24,13 +24,13 @@ Or install it yourself as:
 
 Create your desired directory structure. This will be replicated in etcd. For example:
 
-```shell
+```bash
 mkdir -p config/foo/bar
 ```
     
 Then create a file in the leaf directory containing the keys and values that you want to go into etcd. For example:    
 
-```shell    
+```bash    
 cat <<EOT > config/foo/bar/food.config
 fish=plankton
 cows=grass
@@ -39,11 +39,13 @@ EOT
 
 The name of the file containing the keys and values doesn't matter. In fact, you can split the configuration into multiple files, if you want. An example would look like:
 
-    ./config
-    └── ./foo
-        └── ./bar
-            ├── food.config    # contains fish=plankton and cows=grass
-            └── more.config    # could contain more keys and values
+```text
+./config
+└── ./foo
+    └── ./bar
+        ├── food.config    # contains fish=plankton and cows=grass
+        └── more.config    # could contain more keys and values
+```
             
 ### Populate etcd
 
@@ -77,11 +79,11 @@ Etcdist::Log.level = :info
 
 Clone the source code. To see what's possible, run:
 
-    rake -T
+    $ rake -T
     
 To continuously run tests, run:
 
-    guard
+    $ guard
 
 ## Contributing
 
