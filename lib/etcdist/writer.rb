@@ -3,16 +3,16 @@ require 'etcdist/log'
 module Etcdist
 
   ##
-  # Writes config into etcd.
+  # Writes data into etcd.
   class Writer
 
     def initialize(etcd)
       @etcd = etcd
     end
 
-    def write(config)
+    def write(data)
       written = 0
-      config.each do |directory, entries|
+      data.each do |directory, entries|
         entries.each do |k, v|
           @etcd.set([directory, '/', k].join, value: v)
           written += 1

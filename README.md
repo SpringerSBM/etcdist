@@ -20,42 +20,42 @@ Or install it yourself as:
 
 ## Usage
 
-### Create the config data
+### Create the data
 
 Create your desired directory structure. This will be replicated in etcd. For example:
 
 ```bash
-mkdir -p config/foo/bar
+mkdir -p data/foo/bar
 ```
 
 Then create a file in the leaf directory containing the keys and values that you want to go into etcd. For example:
 
 ```bash
-cat <<EOT > config/foo/bar/food.config
+cat <<EOT > data/foo/bar/food.data
 fish=plankton
 cows=grass
 EOT
 ```
 
-The name of the file containing the keys and values doesn't matter. In fact, you can split the configuration into multiple files, if you want. An example would look like:
+The name of the file containing the keys and values doesn't matter. In fact, you can split the data into multiple files, if you want. An example would look like:
 
 ```text
-./config
+./data
 └── ./foo
     └── ./bar
-        ├── food.config    # contains fish=plankton and cows=grass
-        └── more.config    # could contain more keys and values
+        ├── food.data    # contains fish=plankton and cows=grass
+        └── more.data    # could contain more keys and values
 ```
 
 ### Populate etcd
 
-Then pass the path to your config data directory to Etcdist. For example:
+Then pass the path to your data directory to Etcdist. For example:
 
 ```ruby
 #!/usr/bin/env ruby
 require 'etcdist'
-config_dir = '.../config'
-Etcdist.execute(config_dir)
+dir = '.../data'
+Etcdist.execute(dir)
 ```
 
 ## Configuration
@@ -63,8 +63,8 @@ Etcdist.execute(config_dir)
 ### Etcd host
 
 ```ruby
-Etcdist.execute(config_dir) # defaults to localhost:4001
-Etcdist.execute(config_dir, host: '127.0.0.1', port: 4003)
+Etcdist.execute(dir) # defaults to localhost:4001
+Etcdist.execute(dir, host: '127.0.0.1', port: 4003)
 ```
 
 ### Log level

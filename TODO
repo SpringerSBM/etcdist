@@ -3,3 +3,4 @@
 * implement dangerous mode, i.e. DELETE the keys that are no longer in the config file but still in etcd.
 * error handling.
 * provide etcdist as a binary so that it can be executed from the command line.
+* feature: diff

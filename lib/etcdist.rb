@@ -10,19 +10,18 @@ module Etcdist
   Log.level = :info
 
   ##
-  # This is the place to kick things off, i.e. read config data from F/S and
-  # write it into it into etcd.
+  # This is the place to kick things off, i.e. read data from F/S and write
+  # it into it into etcd.
   #
-  # @param [String] config_dir The path of the config data root directory
+  # @param [String] dir The path to the data directory
   # @param [Hash] opts The options for new Etcd::Client object
   # @opts [String] :host IP address of the etcd server (default 127.0.0.1)
   # @opts [Fixnum] :port Port number of the etcd server (default 4001)
-  def self.execute(config_dir, opts = {})
+  def self.execute(dir, opts = {})
     etcd = Etcd::Client.new(opts)
-    reader = Etcdist::Reader.new
+    reader = Etcdist::Reader.new(dir)
     writer = Etcdist::Writer.new(etcd)
 
-    config = reader.read(config_dir)
-    writer.write(config)
+    writer.write(reader.read)
   end
 end
