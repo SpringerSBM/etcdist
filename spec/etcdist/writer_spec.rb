@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Etcdist::Writer do
 
   let(:etcd) do
-    double('etcd').as_null_object
+    double('etcd')
   end
 
   let(:writer) do
@@ -27,12 +27,11 @@ describe Etcdist::Writer do
   describe 'DELETEs' do
 
     let(:res) do
-      Etcd::Response.new(JSON.parse('{"node":{"dir":true,"nodes":[{"key":"/foo/fish","value":"plankton"}]}}'))
+      Etcd::Response.new(JSON.parse('{"node":{"dir":true,"nodes":[{"key":"/foo/fish","value":"plankton"},{"key":"/foo/cows","value":"grass"}]}}'))
     end
 
     it 'should not remove entries by default' do
       allow(etcd).to receive(:get).with('/foo').and_return(res)
-      expect(etcd).not_to receive(:delete)
       writer.write( '/foo' => {} )
     end
 
@@ -44,8 +43,9 @@ describe Etcdist::Writer do
 
       it 'should remove entries' do
         allow(etcd).to receive(:get).with('/foo').and_return(res)
+        allow(etcd).to receive(:set).with('/foo/cows', value: 'grass')
         expect(etcd).to receive(:delete).with('/foo/fish')
-        writer.write( '/foo' => {} )
+        writer.write( '/foo' => { 'cows' => 'grass'} )
       end
 
     end

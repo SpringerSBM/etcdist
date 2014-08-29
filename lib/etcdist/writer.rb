@@ -23,21 +23,16 @@ module Etcdist
 
     private
     def put(dir, entries)
-      entries.each do |k, v|
-        key = [dir, '/', k].join
-        @etcd.set(key, value: v)
-        Log.debug("wrote #{key}=#{v}")
-      end
-      Log.info("wrote #{entries.length} entries to #{dir}")
+      entries.each { |k, v| @etcd.set([dir, '/', k].join, value: v) }
+      Log.info("wrote #{entries.length} entries to #{dir}") if Log.level >= :info
+      Log.debug("wrote #{entries.length} entries to #{dir}: #{entries}")
     end
 
     def delete(dir, entries)
-      to_delete = @etcd.get(dir).children.map { |n| n.key } - entries.keys
-      to_delete.each do |key|
-        @etcd.delete(key)
-        Log.debug("deleted #{key}")
-      end
-      Log.info("deleted #{to_delete.length} entries from #{dir}")
+      to_delete = @etcd.get(dir).children.map { |n| n.key.sub(/.*\//,'') } - entries.keys
+      to_delete.each { |k| @etcd.delete([dir, '/', k].join) }
+      Log.info("deleted #{to_delete.length} entries from #{dir}") if Log.level >= :info
+      Log.debug("deleted #{to_delete.length} entries from #{dir}: #{to_delete}")
     end
 
   end
