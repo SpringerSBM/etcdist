@@ -26,11 +26,28 @@ describe Etcdist::Writer do
 
   describe 'DELETEs' do
 
-    it 'should remove entries' do
-      json = JSON.parse('{"node":{"dir":true,"nodes":[{"key":"/foo/fish","value":"plankton"}]}}')
-      allow(etcd).to receive(:get).with('/foo').and_return(Etcd::Response.new(json))
-      expect(etcd).to receive(:delete).with('/foo/fish')
+    let(:res) do
+      Etcd::Response.new(JSON.parse('{"node":{"dir":true,"nodes":[{"key":"/foo/fish","value":"plankton"}]}}'))
+    end
+
+    it 'should not remove entries by default' do
+      allow(etcd).to receive(:get).with('/foo').and_return(res)
+      expect(etcd).not_to receive(:delete)
       writer.write( '/foo' => {} )
+    end
+
+    context 'dangerous mode' do
+
+      let(:writer) do
+        Etcdist::Writer.new(etcd, dangerous: true)
+      end
+
+      it 'should remove entries' do
+        allow(etcd).to receive(:get).with('/foo').and_return(res)
+        expect(etcd).to receive(:delete).with('/foo/fish')
+        writer.write( '/foo' => {} )
+      end
+
     end
 
   end

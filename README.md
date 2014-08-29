@@ -54,8 +54,13 @@ Then pass the path to your data directory to Etcdist. For example:
 ```ruby
 #!/usr/bin/env ruby
 require 'etcdist'
-dir = '.../data'
-Etcdist.execute(dir, dangerous: true)
+Etcdist.execute('data')
+```
+
+If you want Etcdist to remove data from etcd that is no longer in your data files, use `dangerous` mode:
+
+```ruby
+Etcdist.execute('data', dangerous: true)
 ```
 
 ## Configuration

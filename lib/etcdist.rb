@@ -14,7 +14,7 @@ module Etcdist
   # it into it into etcd.
   #
   # @param [String] dir The path to the data directory
-  # @param [Hash] opts The options for new Etcd::Client object
+  # @param [Hash] opts Options
   # @opts [String] :host IP address of the etcd server (default 127.0.0.1)
   # @opts [Fixnum] :port Port number of the etcd server (default 4001)
   def self.execute(dir, opts = {})
