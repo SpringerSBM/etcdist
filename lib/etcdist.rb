@@ -20,7 +20,7 @@ module Etcdist
   def self.execute(dir, opts = {})
     etcd = Etcd::Client.new(opts)
     reader = Etcdist::Reader.new(dir)
-    writer = Etcdist::Writer.new(etcd)
+    writer = Etcdist::Writer.new(etcd, opts)
 
     writer.write(reader.read)
   end
