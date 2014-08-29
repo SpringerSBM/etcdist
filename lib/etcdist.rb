@@ -11,7 +11,7 @@ module Etcdist
 
   ##
   # This is the place to kick things off, i.e. read data from F/S and write
-  # it into it into etcd.
+  # into etcd.
   #
   # @param [String] dir The path to the data directory
   # @param [Hash] opts Options
