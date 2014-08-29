@@ -13,18 +13,23 @@ module Etcdist
     def write(data)
       data.each do |directory, entries|
 
+        entries.each do |k, v|
+          directory_and_key = [directory, '/', k].join
+
+          Log.info("writing #{directory_and_key} = #{v}")
+          @etcd.set(directory_and_key, value: v)
+        end
+
         keys = @etcd.get(directory).children.map { |n| n.key.sub(/.*\//,'') }
         to_delete = keys - entries.keys
 
-        entries.each do |k, v|
-          @etcd.set([directory, '/', k].join, value: v)
+        to_delete.each do |k|
+          directory_and_key = [directory, '/', k].join
+          Log.info("deleting #{directory_and_key}")
+          @etcd.delete(directory_and_key)
         end
-        Log.info("wrote #{entries.length} entries to #{directory}")
-
-        to_delete.each { |k| @etcd.delete([directory, '/', k].join) }
-        Log.info("deleted #{to_delete.length} entries from #{directory}")
       end
     end
-
+    
   end
 end
