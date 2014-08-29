@@ -55,7 +55,7 @@ Then pass the path to your data directory to Etcdist. For example:
 #!/usr/bin/env ruby
 require 'etcdist'
 dir = '.../data'
-Etcdist.execute(dir)
+Etcdist.execute(dir, dangerous: true)
 ```
 
 ## Configuration
