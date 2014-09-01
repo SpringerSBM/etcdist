@@ -15,20 +15,20 @@ describe Etcdist::Writer do
     it 'should put entries in etcd' do
       pretend_etcd_contains(nothing)
       expect(etcd).to receive(:set).with('/foo/bar/fish', value: 'plankton')
-      writer.write( '/foo/bar' => { 'fish' => 'plankton' } )
+      writer.write('/foo/bar' => { 'fish' => 'plankton' })
     end
 
     it 'should put entries in correct directory' do
       pretend_etcd_contains(nothing)
       expect(etcd).to receive(:set).with('/water/fish', value: 'plankton')
       expect(etcd).to receive(:set).with('/land/cows', value: 'grass')
-      writer.write( '/water' => { 'fish' => 'plankton' }, '/land' => { 'cows' => 'grass' } )
+      writer.write('/water' => { 'fish' => 'plankton' }, '/land' => { 'cows' => 'grass' })
     end
 
     it 'should not put unchanged entries' do
       pretend_etcd_contains('/foo' => { 'fish' => 'plankton', 'cows' => 'grass' })
       expect(etcd).not_to receive(:set)
-      writer.write( '/foo' => { 'fish' => 'plankton' } )
+      writer.write('/foo' => { 'fish' => 'plankton' })
     end
   end
 
@@ -37,7 +37,7 @@ describe Etcdist::Writer do
     it 'should not delete extra entries by default' do
       pretend_etcd_contains('/foo' => { 'fish' => 'plankton' })
       expect(etcd).not_to receive(:delete)
-      writer.write( '/foo' => {} )
+      writer.write('/foo' => {})
     end
 
     context 'dangerous mode' do
@@ -49,7 +49,7 @@ describe Etcdist::Writer do
       it 'should delete extra entries' do
         pretend_etcd_contains('/foo' => { 'fish' => 'plankton' })
         expect(etcd).to receive(:delete).with('/foo/fish')
-        writer.write( '/foo' => { 'cows' => 'grass'} )
+        writer.write('/foo' => { 'cows' => 'grass' })
       end
 
     end

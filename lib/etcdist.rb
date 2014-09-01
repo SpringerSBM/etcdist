@@ -5,7 +5,6 @@ require 'etcdist/writer'
 
 # The Etcdist name space
 module Etcdist
-
   Log.level = :info
 
   # Main entry point to read data from F/S and write into etcd.
@@ -20,6 +19,6 @@ module Etcdist
     writer = Etcdist::Writer.new(etcd, opts)
 
     writer.write(reader.read)
-    Log.info("Finished successfully.")
+    Log.info('Finished successfully.')
   end
 end

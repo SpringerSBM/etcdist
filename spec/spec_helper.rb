@@ -15,7 +15,7 @@ module Etcdist
     def pretend_etcd_contains(data = nothing)
       allow(etcd).to receive(:exists?).with(any_args).and_return(!data.empty?)
       data.each do |dir, entries|
-        nodes = entries.map { |k, v| {'key' => k, 'value' => v} }
+        nodes = entries.map { |k, v| { 'key' => k, 'value' => v } }
         opts = { 'node' => { 'dir' => true, 'nodes' => nodes } }
         allow(etcd).to receive(:get).with(dir).and_return(Etcd::Response.new(opts))
       end

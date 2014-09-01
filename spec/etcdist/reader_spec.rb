@@ -8,7 +8,7 @@ describe Etcdist::Reader do
   end
 
   it 'should return directories pointing to key/values' do
-    expect(reader.read).to match( { '/etcdist/foo' => { 'fish' => 'plankton', 'cows' => 'grass', 'dogs' => 'bones'} } )
+    expect(reader.read).to match('/etcdist/foo' => { 'fish' => 'plankton', 'cows' => 'grass', 'dogs' => 'bones' })
   end
 
 end

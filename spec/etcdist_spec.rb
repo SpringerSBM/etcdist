@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Etcdist do
 
-  describe "acceptance test - expects etcd running on localhost:4001" do
+  describe 'acceptance test - expects etcd running on localhost:4001' do
 
     let(:etcd_opts) do
       { host: 'localhost', port: 4001 }

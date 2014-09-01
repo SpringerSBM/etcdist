@@ -1,0 +1,15 @@
+AllCops:
+  Include:
+    - lib/**/*.rb
+    - spec/**/*.rb
+
+Documentation:
+  Exclude:
+    - lib/**/version.rb
+    - spec/**/*
+
+Style/EachWithObject:
+  Enabled: false
+
+LineLength:
+  Max: 120

@@ -1,10 +1,8 @@
 require 'etcdist/log'
 
 module Etcdist
-
   # Writes data into etcd.
   class Writer
-
     # @param [Hash] opts Options
     # @opts [String] :dangerous remove data from etcd (default false)
     def initialize(etcd, opts = {})
@@ -24,9 +22,10 @@ module Etcdist
     end
 
     private
+
     def put(dir, entries)
       existing = entries_in(dir)
-      to_put = entries.select { |k,v| existing[k] != v }
+      to_put = entries.select { |k, v| existing[k] != v }
       to_put.each { |k, v| @etcd.set([dir, '/', k].join, value: v) }
       Log.debug("wrote #{to_put.length} entries to #{dir}: #{to_put}")
       to_put.length
@@ -40,8 +39,7 @@ module Etcdist
     end
 
     def entries_in(dir)
-      @etcd.exists?(dir) ? Hash[@etcd.get(dir).children.map { |n| [n.key.sub(/.*\//,''), n.value] }] : {}
+      @etcd.exists?(dir) ? Hash[@etcd.get(dir).children.map { |n| [n.key.sub(/.*\//, ''), n.value] }] : {}
     end
-
   end
 end
