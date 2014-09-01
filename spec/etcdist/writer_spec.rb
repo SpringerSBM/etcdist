@@ -30,6 +30,18 @@ describe Etcdist::Writer do
       expect(etcd).not_to receive(:set)
       writer.write('/foo' => { 'fish' => 'plankton' })
     end
+
+    context 'dry run' do
+      let(:writer) do
+        Etcdist::Writer.new(etcd, dry_run: true)
+      end
+
+      it 'should not put entries in etcd' do
+        pretend_etcd_contains(nothing)
+        expect(etcd).not_to receive(:set)
+        writer.write( '/foo/bar' => { 'fish' => 'plankton' } )
+      end
+    end
   end
 
   describe 'DELETEs' do
@@ -50,6 +62,19 @@ describe Etcdist::Writer do
         pretend_etcd_contains('/foo' => { 'fish' => 'plankton' })
         expect(etcd).to receive(:delete).with('/foo/fish')
         writer.write('/foo' => { 'cows' => 'grass' })
+      end
+
+    end
+
+    context 'dry run' do
+      let(:writer) do
+        Etcdist::Writer.new(etcd, dangerous: true, dry_run: true)
+      end
+
+      it 'should not delete entries' do
+        pretend_etcd_contains('/foo' => { 'fish' => 'plankton' })
+        expect(etcd).not_to receive(:delete)
+        writer.write( '/foo' => { 'cows' => 'grass'} )
       end
 
     end

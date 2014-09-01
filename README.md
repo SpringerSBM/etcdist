@@ -63,6 +63,12 @@ If you want Etcdist to remove data from etcd that is no longer in your data file
 Etcdist.execute('data', dangerous: true)
 ```
 
+If you just want to perform a trial run without making any changes, then use the `dry_run` mode:
+
+```ruby
+Etcdist.execute('data', dangerous: true, dry_run: true)
+```
+
 ## Configuration
 
 ### Etcd host
