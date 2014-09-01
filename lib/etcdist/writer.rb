@@ -15,10 +15,12 @@ module Etcdist
     # Writes data into etcd and optionally removes extra data from etcd
     # @param [Hash] data of type { directory => { key => val } }
     def write(data)
+      count = { put: 0, del: 0 }
       data.each do |dir, entries|
-        put(dir, entries)
-        delete(dir, entries) if @dangerous
+        count[:put] += put(dir, entries)
+        count[:del] += delete(dir, entries) if @dangerous
       end
+      Log.info("#{count[:put]} entries added/modified. #{count[:del]} entries deleted.")
     end
 
     private
@@ -26,15 +28,15 @@ module Etcdist
       existing = entries_in(dir)
       to_put = entries.select { |k,v| existing[k] != v }
       to_put.each { |k, v| @etcd.set([dir, '/', k].join, value: v) }
-      Log.info("wrote #{to_put.length} entries to #{dir}") if Log.level >= :info && to_put.length > 0
       Log.debug("wrote #{to_put.length} entries to #{dir}: #{to_put}")
+      to_put.length
     end
 
     def delete(dir, entries)
       to_delete = entries_in(dir).keys - entries.keys
       to_delete.each { |k| @etcd.delete([dir, '/', k].join) }
-      Log.info("deleted #{to_delete.length} entries from #{dir}") if Log.level >= :info && to_delete.length > 0
       Log.debug("deleted #{to_delete.length} entries from #{dir}: #{to_delete}")
+      to_delete.length
     end
 
     def entries_in(dir)
