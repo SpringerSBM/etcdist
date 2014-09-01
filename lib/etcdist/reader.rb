@@ -2,17 +2,14 @@ require 'etcdist/log'
 
 module Etcdist
 
-  ##
   # Reads data from file system into directories, keys and values.
   class Reader
 
-    ##
     # @param [String] dir The path to the data directory
     def initialize(dir)
       @dir = dir
     end
 
-    ##
     # Returns a hash of type { directory => { key => val } }
     def read
       @dir = File.expand_path(@dir)
@@ -22,7 +19,6 @@ module Etcdist
       files.inject(Hash.new { |h, k| h[k] = {} }) do |h, f|
         directory = File.dirname(f).gsub(@dir, '')
         entries = Hash[ IO.readlines(f).map { |e| e.chomp.split('=') } ]
-        Log.info("found #{entries.length} entries in #{f.gsub(@dir, '')}") if Log.level >= :info
         Log.debug("found #{entries.length} entries in #{f.gsub(@dir, '')}: #{entries}")
         h[directory].merge!(entries)
         h

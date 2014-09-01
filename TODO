@@ -1,8 +1,8 @@
 # TODO
-
 * feature: dry-run / diff
-* feature: do not PUT values if they haven't changed
+* think about / improve error handling (for example: write operation is not atomic)
+
+## Lower priority
 * feature: do not process directories that don't have any modified files
-* think about / improve error handling
-* provide etcdist as a binary so that it can be executed from the command line
+* provide etcdist as a binary so that it can be executed from the command line.
 
