@@ -31,7 +31,7 @@ describe Etcdist::Writer do
       writer.write('/foo' => { 'fish' => 'plankton' })
     end
 
-    context 'dry run' do
+    context 'dry run mode' do
       let(:writer) do
         Etcdist::Writer.new(etcd, dry_run: true)
       end
@@ -66,7 +66,7 @@ describe Etcdist::Writer do
 
     end
 
-    context 'dry run' do
+    context 'dry run mode' do
       let(:writer) do
         Etcdist::Writer.new(etcd, dangerous: true, dry_run: true)
       end
