@@ -18,7 +18,8 @@ module Etcdist
     reader = Etcdist::Reader.new(dir)
     writer = Etcdist::Writer.new(etcd, opts)
 
+    Log.info("using etcd host at: #{etcd.host}:#{etcd.port}")
     writer.write(reader.read)
-    Log.info('Finished successfully.')
+    Log.info('finished successfully.')
   end
 end
