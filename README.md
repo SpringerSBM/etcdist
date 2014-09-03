@@ -1,3 +1,6 @@
+[![Gem Version](https://badge.fury.io/rb/etcdist.svg)](http://badge.fury.io/rb/etcdist)
+[![Build Status](https://travis-ci.org/SpringerSBM/etcdist.svg?branch=master)](https://travis-ci.org/SpringerSBM/etcdist)
+
 # Etcdist
 
 This is a small gem that helps you manage your etcd keys and values in a way that's easy to version control.
