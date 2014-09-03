@@ -1,10 +1,6 @@
 # TODO
-* feature: dry-run / diff
 * think about / improve error handling (for example: write operation is not atomic)
-* replace 'Patric Fornasier' with 'Springer'
 * gemspec: specify required ruby version
-* gemspec: link to homepage (i.e. bitbucket)
-* check licence
 
 ## Lower priority
 * feature: **optionally** remove directories from etcd if no longer present
