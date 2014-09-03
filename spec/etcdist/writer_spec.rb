@@ -39,7 +39,7 @@ describe Etcdist::Writer do
       it 'should not put entries in etcd' do
         pretend_etcd_contains(nothing)
         expect(etcd).not_to receive(:set)
-        writer.write( '/foo/bar' => { 'fish' => 'plankton' } )
+        writer.write('/foo/bar' => { 'fish' => 'plankton' })
       end
     end
   end
@@ -74,7 +74,7 @@ describe Etcdist::Writer do
       it 'should not delete entries' do
         pretend_etcd_contains('/foo' => { 'fish' => 'plankton' })
         expect(etcd).not_to receive(:delete)
-        writer.write( '/foo' => { 'cows' => 'grass'} )
+        writer.write('/foo' => { 'cows' => 'grass' })
       end
 
     end
