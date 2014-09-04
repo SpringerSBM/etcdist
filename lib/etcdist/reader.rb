@@ -16,11 +16,21 @@ module Etcdist
 
       files.reduce(Hash.new { |h, k| h[k] = {} }) do |h, f|
         directory = File.dirname(f).gsub(@dir, '')
-        entries = Hash[IO.readlines(f).map { |e| e.chomp.split('=') }]
-        Log.debug("found #{entries.length} entries in #{f.gsub(@dir, '')}: #{entries}")
-        h[directory].merge!(entries)
+        entries = Hash[IO.readlines(f).map { |e| e.chomp.split('=', 2) }]
+        valid_entries = entries.select {|k,v| valid_key?(k) }
+        Log.debug("found #{valid_entries.length} valid_entries in #{f.gsub(@dir, '')}: #{valid_entries}")
+        h[directory].merge!(valid_entries)
         h
       end
     end
+
+    private
+
+    def valid_key?(key)
+      is_valid = not(key.include? "/")
+      Log.warn("ignoring invalid key #{key}") unless is_valid
+      is_valid
+    end
+
   end
 end
