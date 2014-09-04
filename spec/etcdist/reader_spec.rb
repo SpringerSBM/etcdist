@@ -12,6 +12,6 @@ describe Etcdist::Reader do
                                    'fish' => 'plankton',
                                    'cows' => 'grass',
                                    'dogs' => 'bones',
-                                   'equation' => 'e=mc^2'})
+                                   'equation' => 'e=mc^2' })
   end
 end
