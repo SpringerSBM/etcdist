@@ -15,11 +15,11 @@ gem 'etcdist'
 
 And then execute:
 
-    $ bundle
+    bundle
 
 Or install it yourself as:
 
-    $ gem install etcdist
+    gem install etcdist
 
 ## Usage
 
@@ -28,13 +28,13 @@ Or install it yourself as:
 Create your desired directory structure. This will be replicated in etcd. For example:
 
 ```bash
-$ mkdir -p data/foo/bar
+mkdir -p data/foo/bar
 ```
 
 Then create a file in the leaf directory containing the keys and values that you want to go into etcd. For example:
 
 ```bash
-$ cat <<EOT > data/foo/bar/food.data
+cat <<EOT > data/foo/bar/food.data
 fish=plankton
 cows=grass
 EOT
@@ -93,15 +93,15 @@ Etcdist::Log.level = :info
 
 Clone the source code. To see what's possible, run:
 
-    $ rake -T
+    rake -T
 
 To get the acceptance test to pass, make sure you've got etcd running locally:
 
-    $ docker run -d -p 4001:4001 coreos/etcd
+    docker run -d -p 4001:4001 coreos/etcd
 
 To continuously run tests, run:
 
-    $ guard
+    guard
 
 ## Contributing
 
