@@ -1,9 +1,0 @@
-# TODO
-* think about / improve error handling (for example: write operation is not atomic)
-* gemspec: specify required ruby version
-
-## Lower priority
-* feature: **optionally** remove directories from etcd if no longer present
-* feature: do not process directories that don't have any modified files
-* feature: provide etcdist as a binary so that it can be executed from the command line.
-
