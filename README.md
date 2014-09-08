@@ -28,13 +28,13 @@ Or install it yourself as:
 Create your desired directory structure. This will be replicated in etcd. For example:
 
 ```bash
-mkdir -p data/foo/bar
+$ mkdir -p data/foo/bar
 ```
 
 Then create a file in the leaf directory containing the keys and values that you want to go into etcd. For example:
 
 ```bash
-cat <<EOT > data/foo/bar/food.data
+$ cat <<EOT > data/foo/bar/food.data
 fish=plankton
 cows=grass
 EOT
