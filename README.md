@@ -89,7 +89,13 @@ You can control the log level, as follows:
 Etcdist::Log.level = :info
 ```
 
-## Developing
+## Get Involved
+
+### Mailing List
+
+Use the [etcdist mailing list](https://groups.google.com/group/etcdist) to get in touch with other users and developers.
+
+### Developing
 
 Clone the source code. To see what's possible, run:
 
@@ -103,7 +109,7 @@ To continuously run tests, run:
 
     guard
 
-## Contributing
+### Contributing
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
