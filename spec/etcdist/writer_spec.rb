@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Etcdist::Writer do
-
   let(:etcd) do
     double('etcd').as_null_object
   end
@@ -11,7 +10,6 @@ describe Etcdist::Writer do
   end
 
   describe 'PUTs' do
-
     it 'should put entries in etcd' do
       pretend_etcd_contains(nothing)
       expect(etcd).to receive(:set).with('/foo/bar/fish', value: 'plankton')
@@ -45,7 +43,6 @@ describe Etcdist::Writer do
   end
 
   describe 'DELETEs' do
-
     it 'should not delete extra entries by default' do
       pretend_etcd_contains('/foo' => { 'fish' => 'plankton' })
       expect(etcd).not_to receive(:delete)
@@ -53,7 +50,6 @@ describe Etcdist::Writer do
     end
 
     context 'dangerous mode' do
-
       let(:writer) do
         Etcdist::Writer.new(etcd, dangerous: true)
       end
@@ -63,7 +59,6 @@ describe Etcdist::Writer do
         expect(etcd).to receive(:delete).with('/foo/fish')
         writer.write('/foo' => { 'cows' => 'grass' })
       end
-
     end
 
     context 'dry run mode' do
@@ -76,9 +71,6 @@ describe Etcdist::Writer do
         expect(etcd).not_to receive(:delete)
         writer.write('/foo' => { 'cows' => 'grass' })
       end
-
     end
-
   end
-
 end

@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Etcdist::Reader do
-
   let(:reader) do
     dir = File.join(File.dirname(__FILE__), '../data')
     Etcdist::Reader.new(dir)

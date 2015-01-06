@@ -1,4 +1,5 @@
 require 'etcdist/log'
+require 'pathname'
 
 module Etcdist
   # Reads data from file system into directories, keys and values.
@@ -21,6 +22,17 @@ module Etcdist
         h[directory].merge!(entries)
         h
       end
+    end
+
+    def all_dirs
+      @dir = Pathname.new File.expand_path(@dir)
+      root = Pathname.new '/'
+
+      descendant_dirs = Dir[File.join(@dir, '**', '*')].select { |p| File.directory? p }
+      relative_descendant_dirs = descendant_dirs.map { |d| Pathname.new(d).relative_path_from @dir }
+      dirs = relative_descendant_dirs.map { |d| root.join(d).to_s }
+
+      dirs.push '/'
     end
 
     private

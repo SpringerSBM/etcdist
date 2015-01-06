@@ -20,7 +20,19 @@ module Etcdist
         count[:put] += put(dir, entries)
         count[:del] += delete(dir, entries) if @dangerous
       end
+
       Log.info("#{count[:put]} entries added/modified. #{count[:del]} entries deleted.")
+    end
+
+    # Deletes any directories that are present in etcd but not on the file system
+    def delete_absent_directories(all_dirs)
+      dirs_to_delete = all_etcd_dirs('/').sort.reverse - all_dirs
+      dirs_to_delete.each do |dir|
+        Log.debug("deleting directory #{dir}") if @dangerous
+        @etcd.delete(dir, recursive: true) if @dangerous && !@dry_run
+      end
+
+      Log.info("#{dirs_to_delete.length} directories deleted.") if @dangerous
     end
 
     private
@@ -42,6 +54,22 @@ module Etcdist
 
     def entries_in(dir)
       @etcd.exists?(dir) ? Hash[@etcd.get(dir).children.map { |n| [n.key.sub(/.*\//, ''), n.value] }] : {}
+    end
+
+    def all_etcd_dirs(dir)
+      root_node = @etcd.get(dir, recursive: true).node
+
+      nodes_to_process_stack = [root_node]
+      result = []
+
+      until nodes_to_process_stack.empty?
+        node = nodes_to_process_stack.pop
+        result.push(node.key)
+        child_dir_nodes = node.children.select(dir)
+        child_dir_nodes.each { |child_dir_node| nodes_to_process_stack.push(child_dir_node) }
+      end
+
+      result
     end
   end
 end

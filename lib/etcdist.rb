@@ -20,6 +20,7 @@ module Etcdist
 
     Log.info("using etcd host at: #{etcd.host}:#{etcd.port}")
     writer.write(reader.read)
+    writer.delete_absent_directories(reader.all_dirs)
     Log.info('finished successfully.')
   end
 end

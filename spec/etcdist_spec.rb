@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe Etcdist do
-
   skip 'acceptance test - expects etcd running on localhost:4001' do
-
     let(:etcd_opts) do
       { host: 'localhost', port: 4001 }
     end
@@ -20,7 +18,5 @@ describe Etcdist do
       Etcdist.execute(dir, etcd_opts)
       expect(etcd.get('/etcdist/foo/fish').value).to eq('plankton')
     end
-
   end
-
 end
