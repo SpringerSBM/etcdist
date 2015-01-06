@@ -65,8 +65,7 @@ module Etcdist
       until nodes_to_process_stack.empty?
         node = nodes_to_process_stack.pop
         result.push(node.key)
-        child_dir_nodes = node.children.select(dir)
-        child_dir_nodes.each { |child_dir_node| nodes_to_process_stack.push(child_dir_node) }
+        node.children.each { |child_node| nodes_to_process_stack.push(child_node) if child_node.dir }
       end
 
       result
